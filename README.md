@@ -5,10 +5,10 @@ Compute University of Aveiro student marks mean
 This is a simple script to compute the user's marks average.
 
 ###  Version
-0.1
+0.2
 
 ### Summary of set up
-The easiest way is to access this script through [Greasy Fork](https://greasyfork.org) on this [link](https://greasyfork.org).
+The easiest way is to access this script through [Greasy Fork](https://greasyfork.org) on this [link](https://greasyfork.org/en/scripts/39330-ua-mean).
 
 ### Repo owner
 That would be me, Tisila.

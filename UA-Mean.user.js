@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UA Mean
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Compute marks mean
 // @author       Tisila
 // @match        https://paco.ua.pt/secvirtual/c_historiconotas.asp
