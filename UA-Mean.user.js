@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  Compute marks mean
-// @author       Tiago Avila
+// @author       Tisila
 // @match        https://paco.ua.pt/secvirtual/c_historiconotas.asp
 // @grant        none
 // ==/UserScript==
