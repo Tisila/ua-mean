@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         UA Mean Dev
+// @name         UA Mean
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.3.1
 // @description  Compute marks mean
 // @author       Tisila
 // @match        https://paco.ua.pt/secvirtual/c_planocurr.asp
