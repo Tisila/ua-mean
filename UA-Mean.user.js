@@ -1,41 +1,59 @@
 // ==UserScript==
-// @name         UA Mean
+// @name         UA Mean Dev
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Compute marks mean
 // @author       Tisila
-// @match        https://paco.ua.pt/secvirtual/c_historiconotas.asp
+// @match        https://paco.ua.pt/secvirtual/c_planocurr.asp
 // @grant        none
 // ==/UserScript==
 
-var marks = [];
-var marksTable = document.getElementById("historico");
-var marksRows = marksTable.rows;
-var lastIndex = marksRows.length - 1;
+var tables = document.getElementsByTagName("table");
+var marksTable = tables[37];
+var overallTable = tables[43];
+var data = loadMarks(marksTable);
+var average = mean(data[0], data[1]);
+refresh(average);
 
-for (var row in marksRows) {
-    if (row >= 1 && row < lastIndex) {
-        var mark = marksRows[row].cells[3].innerHTML;
-        //console.log(mark);
-        marks.push(parseInt(mark));
+function loadMarks(table) {
+    var loadedTable = [];
+    var marks = [];
+    var ects = [];
+    var rows = table.rows;
+    for (row = 1; row < 41; row++) {
+        var ect = rows[row].cells[6].innerHTML;
+        var mark = rows[row].cells[7].innerHTML;
+        if (mark.length > 3) {
+            ects.push(parseInt(ect));
+            marks.push(parseInt(mark));
+        }
     }
+    loadedTable.push(ects);
+    loadedTable.push(marks);
+    return loadedTable;
 }
-var mean = mean(marks);
-refresh(mean);
 
-function mean(array) {
-    var total = 0;
-    for (var i in array) {
-        total += array[i];
+function mean(ects, marks) {
+    var markSum = 0;
+    var ectSum = 0;
+    for (i = 0; i <= marks.length - 1; i++) {
+        markSum += ects[i] * marks[i];
+        ectSum += ects[i];
     }
-    var totalMean = total / array.length;
-    return round(totalMean,3);
+    var totalMean = markSum / ectSum;
+    return round(totalMean,2);
 }
 
 function refresh(mean) {
-    var lastRow = marksRows[lastIndex].cells[0];
-    var desc = lastRow.innerHTML;
-    lastRow.innerHTML = desc + "  |  Média: " + mean;
+    var rows = overallTable.rows;
+    var row = overallTable.insertRow(rows.length);
+    row.className = 'table_cell_impar';
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.align = 'left';
+    cell2.align = 'right';
+    cell1.innerHTML = "Média ponderada do plano curricular";
+    cell2.innerHTML = mean;
 }
 
 function round(value, decimals) {
